@@ -1,0 +1,17 @@
+{#Header#}
+<ul class="nav nav-tabs" id="myTab">
+    {% for tab in tabs %}
+        <li {% if forloop.first %} class="active" {% endif %}>
+            <a href="#tab{{ tab.instance.pk }}" data-toggle="tab">{{ tab.instance.title }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{#Tabs content#}
+<div class="tab-content">
+    {% for tab in tabs %}
+        <div class="tab-pane {% if forloop.first %}active{% endif %}" id="tab{{ tab.instance.pk }}">
+            {{ tab.content|safe }}
+        </div>
+    {% endfor %}
+</div>
+
