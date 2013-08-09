@@ -1,10 +1,9 @@
-from django.forms import CharField
 from django.conf import settings
+from django import forms
 
-from cms.plugins.text.forms import TextForm
-from inline_ordering.admin import OrderableStackedInline
 from .models import BootstrapTabsTab
 
+from cms.utils import cms_static_url
 from cms.plugins.text.widgets.wymeditor_widget import WYMEditor
 from cms.plugins.text.settings import USE_TINYMCE
 from django.contrib.admin import StackedInline
@@ -16,6 +15,7 @@ class TabsInline(StackedInline):
     """
     model = BootstrapTabsTab
     admin_preview = False
+    template = "plugin_bootstrap_tabs/admin/stacked.html"
 
     def get_editor_widget(self):
         """
@@ -32,5 +32,11 @@ class TabsInline(StackedInline):
         if db_field.name == "content_text":
             kwargs['widget'] = self.get_editor_widget()
         return super(TabsInline, self).formfield_for_dbfield(db_field,
-                                                                 **kwargs)
+                                                             **kwargs)
+
+    class Media:
+        js = ('cms/js/libs/jquery.query.js',
+              'cms/js/libs/jquery.ui.core.js',
+              'cms/js/libs/jquery.ui.sortable.js',
+              'js/tab_inline_ordering.js',)
 
