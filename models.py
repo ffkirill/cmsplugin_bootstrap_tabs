@@ -1,11 +1,8 @@
 from django.utils.translation import ugettext as _
 from django.db import models
-from django.template.base import Context
 
 from cms.models import Page
-from cms.models import Placeholder
 from cms.models import CMSPlugin
-
 
 from inline_ordering.models import Orderable
 
@@ -16,11 +13,6 @@ class BootstrapTabs(CMSPlugin):
     """
     title = models.CharField(verbose_name=_('Tabs plugin title'),
                              max_length=128)
-
-    # placeholder_to_render = models.ForeignKey(Placeholder,
-    #                                           verbose_name=_('Placeholder to render'),
-    #                                           null=True,
-    #                                           blank=True)
 
     def __unicode__(self):
         return self.title
@@ -53,6 +45,6 @@ class BootstrapTabsTab(Orderable):
     @property
     def content(self):
         """
-        Returns rendered page content or tab text content
+        Returns content for rendering
         """
         return self.content_page or self.content_text or _('Empty')
