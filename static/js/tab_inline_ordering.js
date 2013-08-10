@@ -67,7 +67,7 @@ var InlineOrdering = {
     },
 
     start: function(event, ui) {
-        ui.item.find('.wym_box').remove()
+//        ui.item.find('.wym_box').remove()
     }
 };
 

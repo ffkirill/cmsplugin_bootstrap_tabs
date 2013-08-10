@@ -1,12 +1,10 @@
 from django.conf import settings
-from django import forms
+from django.contrib.admin import StackedInline
 
-from .models import BootstrapTabsTab
-
-from cms.utils import cms_static_url
 from cms.plugins.text.widgets.wymeditor_widget import WYMEditor
 from cms.plugins.text.settings import USE_TINYMCE
-from django.contrib.admin import StackedInline
+
+from .models import BootstrapTabsTab
 
 
 class TabsInline(StackedInline):
@@ -15,7 +13,6 @@ class TabsInline(StackedInline):
     """
     model = BootstrapTabsTab
     admin_preview = False
-    template = "plugin_bootstrap_tabs/admin/stacked.html"
 
     def get_editor_widget(self):
         """
